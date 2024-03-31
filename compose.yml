@@ -1,0 +1,54 @@
+version: '3.9'
+
+networks:
+  backend:
+  frontend:
+
+services:
+  db:
+    container_name: hashdemo-postgres
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_USER=srhreports
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - '15434:5432'
+    volumes:
+      - ./pg-data:/var/lib/postgresql/data
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 30s
+      timeout: 60s
+      retries: 5
+      start_period: 90s 
+      
+  server:
+    build: 
+     context: server
+    container_name: hashdemo-server
+    networks:
+      - backend
+      - frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./server/:/app
+    depends_on:
+      db:
+        condition: service_healthy
+
+  client:
+    build: 
+     context: client
+    container_name: hashdemo-client
+    ports:
+      - "5173:5173"
+    depends_on:
+      - server
+    networks:
+      - frontend
+

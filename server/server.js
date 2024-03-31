@@ -1,17 +1,13 @@
-const fastify = require('fastify')({
-  logger: true
-})
+'use strict'
+const knex = require('./lib/db');
 
-// Declare a route
-fastify.get('/', function (request, reply) {
-  reply.send({ hello: 'world' })
-})
+module.exports = function (fastify, options, next) {
 
-// Run the server!
-fastify.listen({ port: 3000 }, function (err, address) {
-  if (err) {
-    fastify.log.error(err)
-    process.exit(1)
+    fastify.get('/', async function (req, reply) {
+      console.log(knex);
+
+      let x = await knex.raw('select * from test');
+      reply.send(x.rows);
+    })
+    next()
   }
-  // Server is now listening on ${address}
-})
