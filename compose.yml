@@ -1,5 +1,11 @@
 version: '3.9'
 
+volumes:
+  client_node_modules:
+    driver: local
+  server_node_modules:
+    driver: local
+
 networks:
   backend:
   frontend:
@@ -37,18 +43,23 @@ services:
       - "3000:3000"
     volumes:
       - ./server/:/app
-    depends_on:
-      db:
-        condition: service_healthy
+      - server_node_modules:/app/node_modules
+    # depends_on:
+    #   db:
+    #     condition: service_healthy
 
   client:
     build: 
      context: client
     container_name: hashdemo-client
+    volumes:
+      - ./client:/app
+      - client_node_modules:/app/node_modules
     ports:
       - "5173:5173"
-    depends_on:
-      - server
+    # depends_on:
+    #   - server
     networks:
       - frontend
+      - backend
 

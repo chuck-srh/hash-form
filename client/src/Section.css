@@ -1,0 +1,13 @@
+.errors {
+    color:darkred;;
+}
+.container {
+    margin:0 auto;
+    width:300px;
+}
+:root {
+    & .MuiTextField-root {
+        margin:0.5rem;
+    }
+}
+
