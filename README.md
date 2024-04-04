@@ -16,7 +16,7 @@ To simulate the experience multiple users, follow these steps:
 2. Change one or more values in a single section and click save.
 3. In the other browser window, try to change a value and click save.
 
-![App Screenshot](demo/screenshot.png)
+![App Screenshot](demo/app.png)
 
 ### Tech Stack
 **App**
