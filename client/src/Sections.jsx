@@ -14,12 +14,26 @@ const sectionInfo = [
     key: 'sectionA',
     fields: [
       {
-        key: 'fieldA',
-        title: 'Field A'
+        key: 'fieldA1',
+        title: 'Field A1'
       },
       {
-        key: 'fieldB',
-        title: 'Field B'
+        key: 'fieldA2',
+        title: 'Field A2'
+      }
+    ]
+  },
+  {
+    title: 'Section B',
+    key: 'sectionB',
+    fields: [
+      {
+        key: 'fieldB1',
+        title: 'Field B1'
+      },
+      {
+        key: 'fieldB2',
+        title: 'Field B2'
       }
     ]
   }

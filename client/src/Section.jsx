@@ -15,11 +15,11 @@ const Section = ({section, data, hashval, mutation}) => {
     setError,
     handleSubmit,
     clearErrors,
-    formState: { isDirty, errors },
+    formState: { dirtyFields, errors },
   } = useForm();
   
   useEffect(() => {
-    if (!isDirty && data) {
+    if ((!dirtyFields.length > 0) && data) {
       setValue('hashval', hashval, { shouldDirty: false });
       for(let field of section.fields) {
         setValue(field.key, data[field.key], { shouldDirty: false });
@@ -28,8 +28,8 @@ const Section = ({section, data, hashval, mutation}) => {
   }, [data]);
 
   const refresh = () => {
-    queryClient.invalidateQueries({ queryKey: ['sections'] });
     clearErrors();
+    queryClient.invalidateQueries({ queryKey: ['sections'] });
   }
 
   const onSubmit = (submitted) => {
