@@ -18,7 +18,6 @@ To simulate the experience multiple users, follow these steps:
 
 ![App Screenshot](demo/screenshot.png)
 
-
 ### Tech Stack
 **App**
 - React / Vite
